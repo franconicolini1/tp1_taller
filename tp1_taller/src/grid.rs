@@ -27,3 +27,79 @@ impl Grid {
         self.vector[row][col] = elem
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn grid_initialize_rows_with_correct_length() {
+        let length_x = 5;
+        let length_y = 4;
+
+        let mut grid = Grid {
+            length_x: length_x,
+            length_y: length_y,
+            vector: Vec::new(),
+        };
+        grid.initialize_grid();
+
+        assert_eq!(grid.vector.len(), 5)
+    }
+
+    #[test]
+    fn grid_initialize_cols_with_correct_length() {
+        let length_x = 5;
+        let length_y = 4;
+
+        let mut grid = Grid {
+            length_x: length_x,
+            length_y: length_y,
+            vector: Vec::new(),
+        };
+        grid.initialize_grid();
+
+        let mut is_ok = true;
+        for i in 0..length_y {
+            if grid.vector[i].len() != length_y {
+                is_ok = false
+            }
+        }
+
+        assert_eq!(is_ok, true)
+    }
+
+    #[test]
+    fn get_works_correctly() {
+        let length_x = 5;
+        let length_y = 4;
+
+        let mut grid = Grid {
+            length_x: length_x,
+            length_y: length_y,
+            vector: Vec::new(),
+        };
+        grid.initialize_grid();
+
+        grid.vector[3][2] = 4;
+
+        assert_eq!(grid.get(3, 2), 4)
+    }
+
+    #[test]
+    fn put_works_correctly() {
+        let length_x = 5;
+        let length_y = 4;
+
+        let mut grid = Grid {
+            length_x: length_x,
+            length_y: length_y,
+            vector: Vec::new(),
+        };
+        grid.initialize_grid();
+
+        grid.put(9, 4, 1);
+
+        assert_eq!(grid.vector[4][1], 9)
+    }
+}
